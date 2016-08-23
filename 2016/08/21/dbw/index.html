@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>async和defer | DBW</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大家好，浅谈一下async和defer的区别。
+1.1&amp;lt;script src=&amp;quot;dbw.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;    这是我们常用的引用js文件的方法，它立即加载并执行。    也就是说浏览器不等其他文档元素，看到这个标签就加载执行指向的js文件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="async和defer">
+<meta property="og:url" content="http://yoursite.com/2016/08/21/dbw/index.html">
+<meta property="og:site_name" content="DBW">
+<meta property="og:description" content="大家好，浅谈一下async和defer的区别。
+1.1&amp;lt;script src=&amp;quot;dbw.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;    这是我们常用的引用js文件的方法，它立即加载并执行。    也就是说浏览器不等其他文档元素，看到这个标签就加载执行指向的js文件。">
+<meta property="og:image" content="http://segmentfault.com/img/bVcQV0">
+<meta property="og:updated_time" content="2016-08-23T08:08:00.825Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="async和defer">
+<meta name="twitter:description" content="大家好，浅谈一下async和defer的区别。
+1.1&amp;lt;script src=&amp;quot;dbw.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;    这是我们常用的引用js文件的方法，它立即加载并执行。    也就是说浏览器不等其他文档元素，看到这个标签就加载执行指向的js文件。">
+<meta name="twitter:image" content="http://segmentfault.com/img/bVcQV0">
+  
+    <link rel="alternate" href="/atom.xml" title="DBW" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">DBW</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-dbw" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/21/dbw/" class="article-date">
+  <time datetime="2016-08-21T14:34:00.000Z" itemprop="datePublished">2016-08-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      async和defer
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家好，<br>浅谈一下async和defer的区别。</p>
+<p>1.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&quot;dbw.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure><br>    这是我们常用的引用js文件的方法，它立即加载并执行。<br>    也就是说浏览器不等其他文档元素，看到这个<script></script>标签就加载执行指向的js文件。<br><a id="more"></a></p>
+<p>2.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script async src=&quot;dbw.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure><br>        async全称asynchronous，意为异步。<br>        加载和执行js文件与其他文档元素并行进行（就是异步啦）。<br>        不一定按照出现在文档中的顺序执行。（所以要确保各脚本之间没有依存关系）</p>
+<p>3.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script defer src=&quot;dbw.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure><br>        加载js文件和其他文档元素并行进行（异步），但是执行dbw.js文件要在所有元素解析完成之后、DOMContentLoaded 事件触发之前完成。也就是延迟脚本执行。<br>    会按照出现在文档中的顺序执行。</p>
+<p><img src="http://segmentfault.com/img/bVcQV0" alt=""><br>    蓝色线代表网络读取，红色线代表执行时间，这俩都是针对脚本的；绿色线代表 HTML 解析。</p>
+<p>总结：<br>    用了async或者defer，就不能有document.write了。<br>    最好还是放到/body&gt;标签之前啦！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/21/dbw/" data-id="cis4puivs0001woo0yqwxw9qk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/21/dbw/">async和defer</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 dingbowen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

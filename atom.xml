@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>DBW</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2016-08-23T08:08:00.825Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>dingbowen</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>async和defer</title>
+    <link href="http://yoursite.com/2016/08/21/dbw/"/>
+    <id>http://yoursite.com/2016/08/21/dbw/</id>
+    <published>2016-08-21T14:34:00.000Z</published>
+    <updated>2016-08-23T08:08:00.825Z</updated>
+    
+    <content type="html"><![CDATA[<p>大家好，<br>浅谈一下async和defer的区别。</p>
+<p>1.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&quot;dbw.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure><br>    这是我们常用的引用js文件的方法，它立即加载并执行。<br>    也就是说浏览器不等其他文档元素，看到这个<script></script>标签就加载执行指向的js文件。<br><a id="more"></a></p>
+<p>2.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script async src=&quot;dbw.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure><br>        async全称asynchronous，意为异步。<br>        加载和执行js文件与其他文档元素并行进行（就是异步啦）。<br>        不一定按照出现在文档中的顺序执行。（所以要确保各脚本之间没有依存关系）</p>
+<p>3.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script defer src=&quot;dbw.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure><br>        加载js文件和其他文档元素并行进行（异步），但是执行dbw.js文件要在所有元素解析完成之后、DOMContentLoaded 事件触发之前完成。也就是延迟脚本执行。<br>    会按照出现在文档中的顺序执行。</p>
+<p><img src="http://segmentfault.com/img/bVcQV0" alt=""><br>    蓝色线代表网络读取，红色线代表执行时间，这俩都是针对脚本的；绿色线代表 HTML 解析。</p>
+<p>总结：<br>    用了async或者defer，就不能有document.write了。<br>    最好还是放到/body&gt;标签之前啦！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;大家好，&lt;br&gt;浅谈一下async和defer的区别。&lt;/p&gt;
+&lt;p&gt;1.&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;script src=&amp;quot;dbw.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;br&gt;    这是我们常用的引用js文件的方法，它立即加载并执行。&lt;br&gt;    也就是说浏览器不等其他文档元素，看到这个&lt;script&gt;&lt;/script&gt;标签就加载执行指向的js文件。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
